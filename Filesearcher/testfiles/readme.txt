@@ -1,0 +1,2 @@
+http://www.scala-sbt.org/ has been overhauled since the recording of the course. To get the latest release, you simply go to http://www.scala-sbt.org/download.html and choose the appropriate installer. 
+The version dropdown is currently removed, but should be added back if you want to use a previous version. In the meantime, you should be able to go to http://dl.bintray.com/sbt/native-packages/sbt/0.13.2/ and find the appropriate package. Simply change the 0.13.2 to whatever version you need.
