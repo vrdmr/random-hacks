@@ -17,13 +17,13 @@ class FilterCheckerTest extends FlatSpec {
     assert(matchedFiles.length == 0)
   }
 
-  "FilterChecker passed a file with content that matches the filter" should "return that the match succeeded" in {
-    val isContentMatched = FilterChecker("pluralsight").matchesFileContent(new File("./testfiles/pluralsight.data"))
-    assert(isContentMatched == true)
+  "FilterChecker passed a file with content that matches the filter" should "return a 3" in {
+    val isContentMatched = FilterChecker("pluralsight").findMatchedContentCount(new File("./testfiles/pluralsight.data"))
+    assert(isContentMatched == 3)
   }
-  
-  "FilterChecker passed a file with content that does not match the filter" should "return that the match failed" in {
-    val isContentMatched = FilterChecker("pluralsight").matchesFileContent(new File("./testfiles/readme.txt"))
-    assert(isContentMatched == false)
+
+  "FilterChecker passed a file with content that does not match the filter" should "return a 0" in {
+    val isContentMatched = FilterChecker("pluralsight").findMatchedContentCount(new File("./testfiles/readme.txt"))
+    assert(isContentMatched == 0)
   }
 }

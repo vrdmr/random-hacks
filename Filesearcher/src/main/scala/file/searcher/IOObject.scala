@@ -9,13 +9,13 @@ trait IOObject {
 
 // removed the empty '{', '}'.
 // Case comes with its own companions.
-case class FileObject (file: File) extends IOObject
+case class FileObject(file: File) extends IOObject
 case class DirectoryObject(file: File) extends IOObject {
-  def children() = 
-    try 
-      file.listFiles().toList map(file => FileConverter convertToIOObject file)
-  catch {
-    // Catch all with type - catch the specific exceptions 
-    case _ : NullPointerException => List()
-  }
+  def children() =
+    try
+      file.listFiles().toList map (file => FileConverter convertToIOObject file)
+    catch {
+      // Catch all with type - catch the specific exceptions 
+      case _: NullPointerException => List()
+    }
 }
