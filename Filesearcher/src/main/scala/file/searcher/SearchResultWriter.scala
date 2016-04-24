@@ -10,13 +10,21 @@ object SearchResultWriter {
 
     try
       for ((fileName, countOption) <- searchResults) // From searchResutls, fetch tuples.
-        printWriter.println(countOption match {
-          case Some(count) => s"$fileName -> $count" // If a contentFilter was specified.
-          case None        => s"$fileName" // prefixing variables with $, with s before string.
-        })
+    	  printWriter.println(getString(fileName, countOption)) // Writing to file.
     finally {
       printWriter.close()
       fileWriter.close()
+    }
+  }
+
+  def writeToConsole(searchResults: List[(String, Option[Int])]) =
+    for ((fileName, countOption) <- searchResults)
+      println(getString(fileName, countOption))
+
+  private def getString(fileName: String, countOption: Option[Int]) = { // Private method.
+    countOption match {
+      case Some(count) => s"\t$fileName -> $count" // If a contentFilter was specified.
+      case None        => s"\t$fileName" // prefixing variables with $, with s before string.
     }
   }
 }

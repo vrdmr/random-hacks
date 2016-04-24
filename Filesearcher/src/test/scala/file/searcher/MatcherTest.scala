@@ -8,14 +8,14 @@ class MatcherTest extends FlatSpec {
     "return a list with that file name" in {
       val matcher = new Matcher("fake", "fakePath")
       val results = matcher.execute()
-      assert(results == List(("fakePath", None)))
+      assert(results == List(("/Users/varadmeru/hack/Filesearcher/fakePath", None)))
     }
 
   "Matcher using a directory containing  one file matching the filter" should
     "return a list with that file name" in {
       val matcher = new Matcher("txt", new File("./testfiles/").getCanonicalPath())
       val results = matcher.execute()
-      assert(results == List(("readme.txt", None)))
+      assert(results == List(("/Users/varadmeru/hack/Filesearcher/testfiles/readme.txt", None)))
     }
 
   "Matcher that is not using the root file location" should
@@ -30,8 +30,8 @@ class MatcherTest extends FlatSpec {
       val matcher = new Matcher("txt", new File("./testfiles/").getCanonicalPath(), searchSubDirectories)
 
       val results = matcher.execute()
-      assert(results == List(("notes.txt", None), // A list with 2 Tuples
-        ("readme.txt", None)))
+      assert(results == List(("/Users/varadmeru/hack/Filesearcher/testfiles/SomeRandomSubFolder/notes.txt", None), // A list with 2 Tuples
+        ("/Users/varadmeru/hack/Filesearcher/testfiles/readme.txt", None)))
     }
 
   "Matcher given path that has one file that matches file filter and content filter" should
@@ -40,7 +40,7 @@ class MatcherTest extends FlatSpec {
       val matcher = new Matcher("data", new File(".").getCanonicalPath(), true, Some("pluralsight"))
 
       val results = matcher.execute()
-      assert(results == List(("pluralsight.data", Some(3))))
+      assert(results == List(("/Users/varadmeru/hack/Filesearcher/testfiles/pluralsight.data", Some(3))))
     }
 
   "Matcher given path that has no file that matches file filter and content filter" should

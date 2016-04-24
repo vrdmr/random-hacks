@@ -3,12 +3,25 @@ package file.searcher
 import java.io.File
 import scala.annotation.tailrec
 
+/**
+ * This is the main entry point for checking the file system via the supplied specs.
+ *
+ * @param filter The filter that will be used to match the file name.
+ * @param rootLocation The starting location to search.
+ * @param checkSubDirectories A boolean flag to check if the subdirectories need to be checked or not.
+ * @param contentFilter The filter that will be used to match the file contents.
+ */
 class Matcher(filter: String,
               val rootLocation: String = new File(".").getCanonicalPath(), // default argument, also val makes it public. filter isn't public
               checkSubDirectories: Boolean = false,
               contentFilter: Option[String] = None) { // option is just a wrapper about a datatype. Null pointer exceptions is solved this.
   val rootIOObject = FileConverter.convertToIOObject(new File(rootLocation)) // runs in the constructor.
 
+  /**
+   * This searches for the files with the supplied specs
+   *
+   * @return A list of filename, content match count pairs
+   */
   def execute() = {
     // This is inside execute(). Helps in scoping.
     @tailrec // Guarantees tailrec.
@@ -47,7 +60,7 @@ class Matcher(filter: String,
     }
 
     // From the tuples, fetching the Name and the count.
-    contentFilteredFiles map { case (iOObject, count) => (iOObject.name, count) }
+    contentFilteredFiles map { case (iOObject, count) => (iOObject.fullName, count) }
     // (iOObject => iOObject.name) // fetched 
   }
 }
